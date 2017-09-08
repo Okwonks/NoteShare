@@ -4,30 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     tools:context="com.albert.noteshare.AddNoteActivity">
 
     <EditText
         android:id="@+id/noteEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@color/colorTextIcons"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Key in a note"
-        android:layout_marginBottom="10dp"
-        android:padding="5dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="169dp" />
+        android:inputType="textPersonName"
+        android:padding="5dp" />
 
     <Button
         android:id="@+id/addNoteButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/noteEditText"
         android:layout_centerHorizontal="true"
         android:background="@color/colorAccent"
-        android:text="Add Note" />
+        android:text="Add Note"
+        android:textColor="@color/colorTextIcons" />
 </RelativeLayout>
