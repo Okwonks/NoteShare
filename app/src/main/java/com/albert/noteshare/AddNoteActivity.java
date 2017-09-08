@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class AddNoteActivity extends AppCompatActivity {
-    public static final String TAG = AddNoteActivity.class.getSimpleName();
     private Button mAddNoteButton;
     private EditText mWriteEditText;
 
@@ -25,8 +24,8 @@ public class AddNoteActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String note = mWriteEditText.getText().toString();
-                Log.d(TAG, note);
                 Intent intent = new Intent(AddNoteActivity.this, NotesActivity.class);
+                intent.putExtra("note", note);
                 startActivity(intent);
             }
         });
