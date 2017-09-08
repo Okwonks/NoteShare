@@ -31,11 +31,11 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/makeNoteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
-        android:text="Add"
+        android:text="Make Note"
         android:textColor="@color/colorTextIcons"
         tools:layout_editor_absoluteX="278dp"
         tools:layout_editor_absoluteY="445dp"
