@@ -10,21 +10,22 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class NotesActivity extends AppCompatActivity {
-    private TextView mNoteTextView;
-    private ListView mNotesListView;
+    @Bind(R.id.notesListView) ListView mNotesListView;
+    @Bind(R.id.noteTextView) TextView mNoteTextView;
     private String[] notes = new String[] {"Clean out the kitchen", "Walk the dogs", "Go for a jog", "Make some pastor"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes);
-
-        mNotesListView = (ListView) findViewById(R.id.notesListView);
-        mNoteTextView = (TextView) findViewById(R.id.noteTextView);
+        ButterKnife.bind(this);
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, notes);
-        mNotesListView.setAdapter(adapter);
+        mNotesListView.setAdapter(adapter); // Change to custom ArrayAdapter later on
 
         mNotesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -36,7 +37,7 @@ public class NotesActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String newNote = intent.getStringExtra("note"); // Fix this with a TextView later on.
+        String newNote = intent.getStringExtra("note");
         mNoteTextView.setText("Your note: " + newNote + " is being added...");
     }
 }

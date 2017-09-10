@@ -16,8 +16,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddNoteActivity" />
-        <activity android:name=".NotesActivity"></activity>
+        <activity android:name=".AddNoteActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.albert.noteshare.MainActivity">
+            </meta-data>
+        </activity>
+        <activity android:name=".NotesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.albert.noteshare.AddNoteActivity" >
+            </meta-data>
+        </activity>
     </application>
 
 </manifest>

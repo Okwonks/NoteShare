@@ -8,17 +8,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class AddNoteActivity extends AppCompatActivity {
-    private Button mAddNoteButton;
-    private EditText mWriteEditText;
+    @Bind(R.id.addNoteButton) Button mAddNoteButton;
+    @Bind(R.id.noteEditText) EditText mWriteEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
-
-        mWriteEditText = (EditText) findViewById(R.id.noteEditText);
-        mAddNoteButton = (Button) findViewById(R.id.addNoteButton);
+        ButterKnife.bind(this);
 
         mAddNoteButton.setOnClickListener(new View.OnClickListener() {
             @Override
