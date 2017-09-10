@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 public class NotesActivity extends AppCompatActivity {
     @Bind(R.id.notesListView) ListView mNotesListView;
     @Bind(R.id.noteTextView) TextView mNoteTextView;
-    private String[] notes = new String[] {"Clean out the kitchen", "Walk the dogs", "Go for a jog", "Make some pastor"};
+    private String[] notes = new String[] {"Clean out the kitchen", "Walk the dogs", "Go for a jog", "Make some pastor", "Meet up with the friends", "Finish any pending chores", "Remember to call the I.T guy"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

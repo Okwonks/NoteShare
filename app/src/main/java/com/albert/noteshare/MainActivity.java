@@ -8,25 +8,27 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
-    private Button mMakeNoteButton;
-    private TextView mAppWelcomeTextView;
+    @Bind(R.id.makeNoteButton) Button mMakeNoteButton;
+    @Bind(R.id.appWelcomeTextView) TextView mAppWelcomeTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        mMakeNoteButton = (Button) findViewById(R.id.makeNoteButton);
+        Typeface sansationFont = Typeface.createFromAsset(getAssets(), "fonts/sansation.ttf");
+        mAppWelcomeTextView.setTypeface(sansationFont); // Giving the app it's custom font style.
+
         mMakeNoteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddNoteActivity.class);
                 startActivity(intent);
-
-                mAppWelcomeTextView = (TextView) findViewById(R.id.appWelcomeTextView);
-                Typeface sansationFont = Typeface.createFromAsset(getAssets(), "fonts/sansation.ttf");
-                mAppWelcomeTextView.setTypeface(sansationFont);
             }
         });
     }
