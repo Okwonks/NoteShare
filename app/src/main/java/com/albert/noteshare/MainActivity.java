@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
     @Bind(R.id.makeNoteButton) Button mMakeNoteButton;
     @Bind(R.id.appWelcomeTextView) TextView mAppWelcomeTextView;
+    @Bind(R.id.allNotesButton) Button mAllNotesButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddNoteActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mAllNotesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ListNotesActivity.class);
                 startActivity(intent);
             }
         });
