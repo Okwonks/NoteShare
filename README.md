@@ -30,7 +30,8 @@ This is important in order to test how well the app will work. This testing emul
 This is important in order to test the logic used in the app. This tests the backend bit of the app.
 
 ## Deployment
-Deployment can be done to Google Play Store or use appetize.io(for streaming Android Natice Apps in the Browser)
+Deployment can be done to Google Play Store or use appetize.io(for streaming Android Natice Apps in the Browser).
+A preview of the app can be seen [here](https://appetize.io/app/gcwexxkvuyx21qvuq2x4wyf3f4).
 
 ## Built With
 * `java` - The backend language
