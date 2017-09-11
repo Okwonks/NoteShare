@@ -26,7 +26,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.albert.noteshare.AddNoteActivity"></meta-data>
         </activity>
-        <activity android:name=".ListNotesActivity"></activity>
+        <activity android:name=".ListNotesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.albert.noteshare.MainActivity"></meta-data>
+        </activity>
     </application>
 
 </manifest>
