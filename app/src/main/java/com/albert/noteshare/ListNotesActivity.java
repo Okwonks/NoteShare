@@ -19,7 +19,7 @@ public class ListNotesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_notes);
         ButterKnife.bind(this);
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, notes);
         mAllNotesListView.setAdapter(adapter);
     }
 }
