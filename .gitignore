@@ -7,3 +7,11 @@
 /build
 /captures
 .externalNativeBuild
+/gradle.properties
+.idea/markdown-navigator.xml
+.idea/markdown-navigator/
+.project
+.settings/
+app/.project
+app/.settings/
+app/libs/

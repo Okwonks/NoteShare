@@ -17,6 +17,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildTypes.each {
+        it.buildConfigField 'String', 'TWITTER_CONSUMER_KEY', TwitterConsumerKey
+        it.buildConfigField 'String', 'TWITTER_CONSUMER_SECRET', TwitterConsumerSecret
+        it.buildConfigField 'String', 'TWITTER_ACCESS_TOKEN', TwitterAccessToken
+        it.buildConfigField 'String', 'TWITTER_TOKEN_SECRET', TwitterTokenSecret
+    }
 }
 
 dependencies {
@@ -28,4 +35,6 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.jakewharton:butterknife:7.0.1'
     testCompile 'junit:junit:4.12'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'se.akerfeldt:okhttp-signpost:1.1.0'
 }
