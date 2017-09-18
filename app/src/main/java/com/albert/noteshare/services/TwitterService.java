@@ -1,5 +1,7 @@
 package com.albert.noteshare.services;
 
+import android.util.Log;
+
 import com.albert.noteshare.Constants;
 import com.albert.noteshare.models.Tweet;
 
@@ -36,6 +38,7 @@ public class TwitterService {
         HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.BASE_URL).newBuilder();
         urlBuilder.addQueryParameter(Constants.TWITTER_TWEET_QUERY_PARAMETER, tweet);
         String url = urlBuilder.build().toString();
+        Log.v("url", url);
 
         Request request = new Request.Builder()
                 .url(url)
