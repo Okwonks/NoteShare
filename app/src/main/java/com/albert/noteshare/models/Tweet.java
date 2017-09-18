@@ -6,15 +6,17 @@ package com.albert.noteshare.models;
 
 public class Tweet {
     private String mText;
-    private boolean mRetweeted;
+    private String mRetweeted;
     private String mName;
-    private int mfollowers;
+    private String mfollowers;
+    private String mImageUrl;
 
-    public Tweet(String text, boolean retweeted, String name, int followers) {
+    public Tweet(String text, String retweeted, String name, String followers, String imageUrl) {
         this.mText = text;
         this.mRetweeted = retweeted;
         this.mName = name;
         this.mfollowers = followers;
+        this.mImageUrl = imageUrl;
     }
 
     public String getText() {
@@ -25,11 +27,15 @@ public class Tweet {
         return mName;
     }
 
-    public int getFollowers() {
+    public String getFollowers() {
         return mfollowers;
     }
 
-    public boolean getRetweeted() {
+    public String getRetweeted() {
         return mRetweeted;
+    }
+
+    public String getImageUrl() {
+        return mImageUrl;
     }
 }

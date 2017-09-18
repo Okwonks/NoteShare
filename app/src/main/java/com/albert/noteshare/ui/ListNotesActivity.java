@@ -1,4 +1,4 @@
-package com.albert.noteshare;
+package com.albert.noteshare.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.albert.noteshare.R;
 import com.albert.noteshare.models.Tweet;
 import com.albert.noteshare.services.TwitterService;
 

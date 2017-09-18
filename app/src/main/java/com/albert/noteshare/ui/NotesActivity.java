@@ -1,4 +1,4 @@
-package com.albert.noteshare;
+package com.albert.noteshare.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,9 +11,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.albert.noteshare.R;
+import com.albert.noteshare.models.Tweet;
 import com.albert.noteshare.services.TwitterService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,7 +28,8 @@ public class NotesActivity extends AppCompatActivity {
     private static final String TAG = NotesActivity.class.getSimpleName();
     @Bind(R.id.notesListView) ListView mNotesListView;
     @Bind(R.id.noteTextView) TextView mNoteTextView;
-    private String[] notes = new String[] {"Clean out the kitchen", "Walk the dogs", "Go for a jog", "Make some pastor", "Meet up with the friends", "Finish any pending chores", "Remember to call the I.T guy"};
+
+    public ArrayList<Tweet> mTweets = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +37,8 @@ public class NotesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notes);
         ButterKnife.bind(this);
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, notes);
-        mNotesListView.setAdapter(adapter); // Change to custom ArrayAdapter later on
+//        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, notes);
+//        mNotesListView.setAdapter(adapter); // Change to custom ArrayAdapter later on
 
         mNotesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -62,14 +66,25 @@ public class NotesActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    String jsonData = response.body().string();
-                    if (response.isSuccessful()) {
-                        Log.v(TAG, jsonData);
+                mTweets = twitterService.processResults(response);
 
+                NotesActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String[] userName = new String[mTweets.size()];
+
+                        for (int i = 0; i < userName.length; i++) {
+                            userName[i] = mTweets.get(i).getName();
+                        }
+
+                        ArrayAdapter adapter = new ArrayAdapter(NotesActivity.this, android.R.layout.simple_list_item_1, userName);
+                        mNotesListView.setAdapter(adapter);
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                });
+                for (Tweet tweet: mTweets) {
+                    Log.d(TAG, "Text: " + tweet.getText());
+                    Log.d(TAG, "Name: " + tweet.getName());
+                    Log.d(TAG, "ImageUrl: " + tweet.getImageUrl());
                 }
             }
         });
