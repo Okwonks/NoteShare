@@ -12,7 +12,7 @@ import com.albert.noteshare.R;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class AddNoteActivity extends AppCompatActivity {
+public class AddNoteActivity extends AppCompatActivity implements View.OnClickListener {
     @Bind(R.id.addNoteButton) Button mAddNoteButton;
     @Bind(R.id.noteEditText) EditText mWriteEditText;
 
@@ -22,14 +22,14 @@ public class AddNoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_note);
         ButterKnife.bind(this);
 
-        mAddNoteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String note = mWriteEditText.getText().toString();
-                Intent intent = new Intent(AddNoteActivity.this, NotesActivity.class);
-                intent.putExtra("note", note);
-                startActivity(intent);
-            }
-        });
+        mAddNoteButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        String tweet = mWriteEditText.getText().toString();
+        Intent intent = new Intent(AddNoteActivity.this, NotesActivity.class);
+        intent.putExtra("tweet", tweet);
+        startActivity(intent);
     }
 }
