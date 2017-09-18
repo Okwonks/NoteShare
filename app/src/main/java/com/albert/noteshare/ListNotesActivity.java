@@ -2,11 +2,21 @@ package com.albert.noteshare;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.albert.noteshare.models.Tweet;
+import com.albert.noteshare.services.TwitterService;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class ListNotesActivity extends AppCompatActivity {
     @Bind(R.id.allNotesListView) ListView mAllNotesListView;
@@ -17,6 +27,7 @@ public class ListNotesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_notes);
         ButterKnife.bind(this);
+
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, notes);
         mAllNotesListView.setAdapter(adapter);
