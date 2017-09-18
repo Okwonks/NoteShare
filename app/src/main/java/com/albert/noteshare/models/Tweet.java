@@ -8,15 +8,17 @@ public class Tweet {
     private String mText;
     private String mRetweeted;
     private String mName;
-    private String mfollowers;
+    private int mfollowers;
     private String mImageUrl;
+    private int mRetweets;
 
-    public Tweet(String text, String retweeted, String name, String followers, String imageUrl) {
+    public Tweet(String text, String retweeted, String name, int followers, String imageUrl, int retweets) {
         this.mText = text;
         this.mRetweeted = retweeted;
         this.mName = name;
         this.mfollowers = followers;
         this.mImageUrl = imageUrl;
+        this.mRetweets = retweets;
     }
 
     public String getText() {
@@ -27,7 +29,7 @@ public class Tweet {
         return mName;
     }
 
-    public String getFollowers() {
+    public int getFollowers() {
         return mfollowers;
     }
 
@@ -37,5 +39,9 @@ public class Tweet {
 
     public String getImageUrl() {
         return mImageUrl;
+    }
+
+    public int getRetweets() {
+        return mRetweets;
     }
 }

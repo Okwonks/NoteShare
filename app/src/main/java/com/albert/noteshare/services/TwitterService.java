@@ -57,11 +57,12 @@ public class TwitterService {
                     JSONObject tweetJSON = statusesJSON.getJSONObject(i);
                     String text = tweetJSON.getString("text");
                     String retweeted = tweetJSON.getString("retweeted");
-                    String name = tweetJSON.getString("name");
-                    String followers = tweetJSON.getString("followers_count");
-                    String imageUrl = tweetJSON.getString("profile_image_url");
+                    String name = tweetJSON.getJSONObject("user").getString("name");
+                    int followers = tweetJSON.getJSONObject("user").getInt("followers_count");
+                    String imageUrl = tweetJSON.getJSONObject("user").getString("profile_image_url");
+                    int retweets = tweetJSON.getInt("retweet_count");
 
-                    Tweet tweet = new Tweet(text, retweeted, name, followers, imageUrl);
+                    Tweet tweet = new Tweet(text, retweeted, name, followers, imageUrl, retweets);
                     tweets.add(tweet);
                 }
             }
