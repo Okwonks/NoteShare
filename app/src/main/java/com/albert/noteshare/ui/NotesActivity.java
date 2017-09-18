@@ -3,6 +3,8 @@ package com.albert.noteshare.ui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.albert.noteshare.R;
+import com.albert.noteshare.adapters.NoteListAdapter;
 import com.albert.noteshare.models.Tweet;
 import com.albert.noteshare.services.TwitterService;
 
@@ -28,6 +31,8 @@ public class NotesActivity extends AppCompatActivity {
     private static final String TAG = NotesActivity.class.getSimpleName();
     @Bind(R.id.notesListView) ListView mNotesListView;
     @Bind(R.id.noteTextView) TextView mNoteTextView;
+    @Bind(R.id.tweetRecyclerView) RecyclerView mTweetRecyclerView;
+    private NoteListAdapter mAdapter;
 
     public ArrayList<Tweet> mTweets = new ArrayList<>();
 
@@ -43,8 +48,8 @@ public class NotesActivity extends AppCompatActivity {
         mNotesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String note = ((TextView)view).getText().toString();
-                Toast.makeText(NotesActivity.this, note, Toast.LENGTH_LONG).show();
+                String tweet = ((TextView)view).getText().toString();
+                Toast.makeText(NotesActivity.this, tweet, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -71,14 +76,11 @@ public class NotesActivity extends AppCompatActivity {
                 NotesActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        String[] userName = new String[mTweets.size()];
-
-                        for (int i = 0; i < userName.length; i++) {
-                            userName[i] = mTweets.get(i).getName();
-                        }
-
-                        ArrayAdapter adapter = new ArrayAdapter(NotesActivity.this, android.R.layout.simple_list_item_1, userName);
-                        mNotesListView.setAdapter(adapter);
+                        mAdapter = new NoteListAdapter(getApplicationContext(), mTweets);
+                        mTweetRecyclerView.setAdapter(mAdapter);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(NotesActivity.this);
+                        mTweetRecyclerView.setLayoutManager(layoutManager);
+                        mTweetRecyclerView.setHasFixedSize(true);
                     }
                 });
                 for (Tweet tweet: mTweets) {
