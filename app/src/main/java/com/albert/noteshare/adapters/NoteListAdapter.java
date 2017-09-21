@@ -1,6 +1,7 @@
 package com.albert.noteshare.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,10 @@ import android.widget.TextView;
 
 import com.albert.noteshare.R;
 import com.albert.noteshare.models.Tweet;
+import com.albert.noteshare.ui.TweetDetailActivity;
 import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -47,7 +51,7 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.NoteVi
         return mTweets.size();
     }
 
-    public class NoteViewHolder extends RecyclerView.ViewHolder {
+    public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @Bind(R.id.userImageView) ImageView mUserImageView;
         @Bind(R.id.userName) TextView mUserName;
         @Bind(R.id.followersTextView) TextView mFollowersTextView;
@@ -59,6 +63,7 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.NoteVi
             super(view);
             ButterKnife.bind(this, view);
             mContext = view.getContext();
+            view.setOnClickListener(this);
         }
 
         public void bindTweet(Tweet tweet) {
@@ -66,6 +71,15 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.NoteVi
             mUserName.setText(tweet.getName());
             mRetweetsTextView.setText("Retweets: " + tweet.getRetweets());
             mFollowersTextView.setText("Followers: " + tweet.getFollowers());
+        }
+
+        @Override
+        public void onClick(View v) {
+            int viewPosition = getLayoutPosition();
+            Intent intent = new Intent(mContext, TweetDetailActivity.class);
+            intent.putExtra("position", viewPosition);
+            intent.putExtra("tweets", Parcels.wrap(mTweets));
+            mContext.startActivity(intent);
         }
     }
 }

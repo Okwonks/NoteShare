@@ -31,9 +31,10 @@
         <activity android:name=".ui.ListNotesActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.albert.noteshare.ui.MainActivity" />
+                android:value="com.albert.noteshare.ui.MainActivity"></meta-data>
         </activity>
-        <activity android:name=".ui.TweetDetail"></activity>
+        <activity android:name=".ui.TweetDetailActivity" />
+        <activity android:name=".ui.WriteNoteActivity"></activity>
     </application>
 
 </manifest>
