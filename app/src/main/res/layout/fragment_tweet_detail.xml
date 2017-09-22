@@ -114,13 +114,20 @@
                     android:gravity="center_vertical"/>
                 </LinearLayout>
 
-            <Button
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/saveTweetButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Save Tweet"
-                android:id="@+id/saveTweetButton"
                 android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="13dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 android:background="@color/colorAccent"
+                android:elevation="10dp"
+                android:src="@drawable/ic_save_white_24dp"
+                android:text="Save Tweet"
                 android:textColor="@color/colorTextIcons"
                 android:textSize="15sp" />
             </RelativeLayout>

@@ -7,46 +7,46 @@ import org.parceler.Parcel;
  */
 @Parcel
 public class Tweet {
-    private String mText;
-    private String mRetweeted;
-    private String mName;
-    private int mfollowers;
-    private String mImageUrl;
-    private int mRetweets;
+    private String text;
+    private String retweeted;
+    private String name;
+    private int followers;
+    private String imageUrl;
+    private int retweets;
 
     public Tweet(String text, String retweeted, String name, int followers, String imageUrl, int retweets) {
-        this.mText = text;
-        this.mRetweeted = retweeted;
-        this.mName = name;
-        this.mfollowers = followers;
-        this.mImageUrl = imageUrl;
-        this.mRetweets = retweets;
+        this.text = text;
+        this.retweeted = retweeted;
+        this.name = name;
+        this.followers = followers;
+        this.imageUrl = getLargeImageUrl(imageUrl);
+        this.retweets = retweets;
     }
 
     public Tweet() {}
 
     public String getText() {
-        return mText;
+        return text;
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public int getFollowers() {
-        return mfollowers;
+        return followers;
     }
 
     public String getRetweeted() {
-        return mRetweeted;
+        return retweeted;
     }
 
     public String getImageUrl() {
-        return mImageUrl;
+        return imageUrl;
     }
 
     public int getRetweets() {
-        return mRetweets;
+        return retweets;
     }
 
     public String getLargeImageUrl(String imageUrl) {
