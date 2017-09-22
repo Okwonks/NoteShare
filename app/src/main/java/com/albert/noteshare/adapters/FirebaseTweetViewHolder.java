@@ -43,7 +43,7 @@ public class FirebaseTweetViewHolder extends RecyclerView.ViewHolder implements 
 
     public void bindTweet(Tweet tweet) {
         ImageView userImageView = (ImageView) mView.findViewById(R.id.userImageView);
-        TextView nameTextView = (TextView) mView.findViewById(R.id.userNameTextView);
+        TextView nameTextView = (TextView) mView.findViewById(R.id.userName);
         TextView retweetsTextView = (TextView) mView.findViewById(R.id.retweetsTextView);
         TextView followersTextView = (TextView) mView.findViewById(R.id.followersTextView);
 
@@ -53,8 +53,8 @@ public class FirebaseTweetViewHolder extends RecyclerView.ViewHolder implements 
                 .centerCrop()
                 .into(userImageView);
         nameTextView.setText(tweet.getName());
-        retweetsTextView.setText(tweet.getRetweets());
-        followersTextView.setText(tweet.getFollowers());
+        retweetsTextView.setText("Retweets: " + tweet.getRetweets()); //
+        followersTextView.setText("Followers: " + tweet.getFollowers());
     }
 
     @Override
@@ -64,7 +64,7 @@ public class FirebaseTweetViewHolder extends RecyclerView.ViewHolder implements 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     tweets.add(snapshot.getValue(Tweet.class));
                 }
 

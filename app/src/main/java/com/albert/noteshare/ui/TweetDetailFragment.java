@@ -73,7 +73,7 @@ public class TweetDetailFragment extends Fragment implements View.OnClickListene
                     .getInstance()
                     .getReference(Constants.FIREBASE_CHILD_TWEET);
             tweetRef.push().setValue(mTweet);
-            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT);
+            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -2,13 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.albert.noteshare.ui.TweetDetailFragment">
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary">
+
 
         <ImageView
             android:layout_width="match_parent"
@@ -20,46 +21,46 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp"
+            android:background="@color/colorPrimaryLight"
+            android:paddingBottom="20dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:paddingBottom="20dp">
+            android:paddingTop="20dp">
 
             <TextView
+                android:id="@+id/userNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/userNameTextView"
-                android:text="@string/user_name"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:textSize="20sp"
+                android:text="@string/user_name"
                 android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold"/>
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/retweetTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/retweets"
-                android:id="@+id/retweetTextView"
-                android:layout_alignTop="@+id/userNameTextView"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/userNameTextView"
+                android:text="@string/retweets"
                 android:textColor="@color/colorAccent"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tweetTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Post a tweet maybe"
-                android:id="@+id/tweetTextView"
-                android:layout_below="@+id/userNameTextView"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_below="@+id/userNameTextView"
+                android:text="Post a tweet maybe"
                 android:textColor="@color/colorSecondaryText"
                 android:textStyle="italic" />
 
         </RelativeLayout>
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -72,7 +73,6 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_above="@+id/saveTweetButton"
                 android:paddingLeft="30dp"
                 android:paddingTop="20dp"
                 android:paddingRight="30dp">
@@ -116,10 +116,9 @@
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/saveTweetButton"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginBottom="13dp"
                 android:layout_marginEnd="16dp"
@@ -128,12 +127,10 @@
                 android:elevation="10dp"
                 android:src="@drawable/ic_save_white_24dp"
                 android:text="Save Tweet"
+                app:fab_type="mini"
                 android:textColor="@color/colorTextIcons"
                 android:textSize="15sp" />
             </RelativeLayout>
-
-
-
     </LinearLayout>
 
 </FrameLayout>
