@@ -15,14 +15,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.albert.noteshare.Constants;
 import com.albert.noteshare.R;
-import com.albert.noteshare.adapters.NoteListAdapter;
+import com.albert.noteshare.adapters.TweetListAdapter;
 import com.albert.noteshare.models.Tweet;
 import com.albert.noteshare.services.TwitterService;
 
@@ -44,7 +43,7 @@ public class NotesActivity extends AppCompatActivity {
     @Bind(R.id.notesListView) ListView mNotesListView;
     @Bind(R.id.noteTextView) TextView mNoteTextView;
     @Bind(R.id.tweetRecyclerView) RecyclerView mTweetRecyclerView;
-    private NoteListAdapter mAdapter;
+    private TweetListAdapter mAdapter;
 
     public ArrayList<Tweet> mTweets = new ArrayList<>();
 
@@ -131,7 +130,7 @@ public class NotesActivity extends AppCompatActivity {
                 NotesActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mAdapter = new NoteListAdapter(getApplicationContext(), mTweets);
+                        mAdapter = new TweetListAdapter(getApplicationContext(), mTweets);
                         mTweetRecyclerView.setAdapter(mAdapter);
                         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(NotesActivity.this);
                         mTweetRecyclerView.setLayoutManager(layoutManager);

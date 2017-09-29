@@ -21,28 +21,25 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-/**
- * Created by albert on 9/18/17.
- */
 
-public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.NoteViewHolder> {
+public class TweetListAdapter extends RecyclerView.Adapter<TweetListAdapter.NoteViewHolder> {
     private ArrayList<Tweet> mTweets = new ArrayList<>();
     private Context mContext;
 
-    public NoteListAdapter(Context context, ArrayList<Tweet> tweets) {
+    public TweetListAdapter(Context context, ArrayList<Tweet> tweets) {
         mContext = context;
         mTweets = tweets;
     }
 
     @Override
-    public NoteListAdapter.NoteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public TweetListAdapter.NoteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notes_list_item, parent, false);
         NoteViewHolder viewHolder = new NoteViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(NoteListAdapter.NoteViewHolder holder, int position) {
+    public void onBindViewHolder(TweetListAdapter.NoteViewHolder holder, int position) {
         holder.bindTweet(mTweets.get(position));
     }
 
@@ -85,12 +82,12 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.NoteVi
 }
 /*
     @Override
-    public NoteListAdapter.NoteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public TweetListAdapter.NoteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
     }
 
     @Override
-    public void onBindViewHolder(NoteListAdapter.NoteViewHolder holder, int position) {
+    public void onBindViewHolder(TweetListAdapter.NoteViewHolder holder, int position) {
 
     }
 

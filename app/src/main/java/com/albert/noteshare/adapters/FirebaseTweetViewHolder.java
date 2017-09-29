@@ -53,7 +53,7 @@ public class FirebaseTweetViewHolder extends RecyclerView.ViewHolder implements 
                 .centerCrop()
                 .into(userImageView);
         nameTextView.setText(tweet.getName());
-        retweetsTextView.setText("Retweets: " + tweet.getRetweets()); //
+        retweetsTextView.setText("Retweets: " + tweet.getRetweets()); // Required to concat due to save issues.0
         followersTextView.setText("Followers: " + tweet.getFollowers());
     }
 

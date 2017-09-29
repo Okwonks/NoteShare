@@ -8,4 +8,7 @@
     <string name="add_notes_share">Add notes, share.</string>
     <string name="user">User</string>
     <string name="user_email_com">user@useremail.com</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="your_note">Your Note goes here...</string>
 </resources>

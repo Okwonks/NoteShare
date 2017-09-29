@@ -38,7 +38,8 @@
         </activity>
         <activity android:name=".ui.TweetDetailActivity" />
         <activity android:name=".ui.WriteNoteActivity" />
-        <activity android:name=".ui.TweetSavedListActivity"></activity>
+        <activity android:name=".ui.TweetSavedListActivity" />
+        <activity android:name=".ui.CreateAcountActivity"></activity>
     </application>
 
 </manifest>

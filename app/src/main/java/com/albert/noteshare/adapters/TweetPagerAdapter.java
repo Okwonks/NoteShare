@@ -9,10 +9,6 @@ import com.albert.noteshare.ui.TweetDetailFragment;
 
 import java.util.ArrayList;
 
-/**
- * Created by albert on 9/18/17.
- */
-
 public class TweetPagerAdapter extends FragmentPagerAdapter {
     private ArrayList<Tweet> mTweets;
 

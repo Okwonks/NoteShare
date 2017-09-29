@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.albert.noteshare.Constants;
 import com.albert.noteshare.R;
+import com.albert.noteshare.models.Note;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,8 +37,8 @@ public class WriteNoteActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()) {
-                    String note = noteSnapshot.getValue().toString();
-                    Log.d("Notes updated", "Note: " + note);
+                    String userNote = noteSnapshot.getValue().toString();
+                    Log.d("Notes updated", "Note: " + userNote);
                 }
             }
 
@@ -50,16 +51,18 @@ public class WriteNoteActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_note);
         ButterKnife.bind(this);
+
+        mNoteSaveButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         if (view == mNoteSaveButton) {
-            String note = mMultiEditTextView.getText().toString();
+            String userNote = mMultiEditTextView.getText().toString();
+            Note note = new Note(userNote, "");
             saveNoteToFirebase(note);
 
             Intent intent = new Intent(WriteNoteActivity.this, ListNotesActivity.class);
-            intent.putExtra("note", note);
             startActivity(intent);
         }
     }
@@ -70,7 +73,7 @@ public class WriteNoteActivity extends AppCompatActivity implements View.OnClick
         mWrittenNoteReference.removeEventListener(mWrittenNoteReferenceListener);
     }
 
-    private void saveNoteToFirebase(String note) {
+    private void saveNoteToFirebase(Note note) {
         mWrittenNoteReference.push().setValue(note);
     }
 }
