@@ -11,4 +11,11 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="your_note">Your Note goes here...</string>
+    <string name="sign_in_name">Name</string>
+    <string name="user_email">Email</string>
+    <string name="user_password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="log_in_here">Already have an account? Log in here.</string>
+    <string name="create_account">Create Account</string>
 </resources>
