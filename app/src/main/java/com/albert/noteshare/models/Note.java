@@ -8,6 +8,7 @@ public class Note {
     /*It should not be confused with the public class Note or the Note constructor*/
     private String note;
     private String title;
+    private String pushId;
 
     public Note(String note, String title) {
         this.note = note;
@@ -22,5 +23,13 @@ public class Note {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
 }
