@@ -30,8 +30,6 @@ public class WriteNoteActivity extends AppCompatActivity implements View.OnClick
     @Bind(R.id.noteSaveButton) FloatingActionButton mNoteSaveButton;
     @Bind(R.id.multiEditTextView) EditText mMultiEditTextView;
 
-    private Note mNote;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mWrittenNoteReference = FirebaseDatabase
@@ -87,7 +85,7 @@ public class WriteNoteActivity extends AppCompatActivity implements View.OnClick
                 .child(uid);
         DatabaseReference pushRef = noteRef.push();
         String pushId = pushRef.getKey();
-        mNote.setPushId(pushId);
+        note.setPushId(pushId);
         pushRef.setValue(note);
     }
 }
