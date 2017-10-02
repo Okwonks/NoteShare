@@ -14,4 +14,5 @@ public class Constants {
     public static final String PREFERENCES_TWEET_KEY = "tweet";
     public static final String FIREBASE_CHILD_WRITTEN_NOTE = "writtenNote";
     public static final String FIREBASE_CHILD_TWEET = "tweets";
+    public static final String FIREBASE_QUERY_INDEX = "index";
 }

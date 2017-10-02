@@ -14,6 +14,7 @@ public class Tweet {
     private String imageUrl;
     private int retweets;
     private String pushId;
+    String index;
 
     public Tweet(String text, String retweeted, String name, int followers, String imageUrl, int retweets) {
         this.text = text;
@@ -22,6 +23,7 @@ public class Tweet {
         this.followers = followers;
         this.imageUrl = getLargeImageUrl(imageUrl);
         this.retweets = retweets;
+        this.index = "not_specified";
     }
 
     public Tweet() {}
@@ -61,5 +63,13 @@ public class Tweet {
 
     public void setPushId(String pushId) {
         this.pushId = pushId;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
     }
 }

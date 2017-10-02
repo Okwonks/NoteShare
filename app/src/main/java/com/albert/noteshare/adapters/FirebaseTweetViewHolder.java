@@ -22,10 +22,11 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
-public class FirebaseTweetViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class FirebaseTweetViewHolder extends RecyclerView.ViewHolder {
     /*Constants for resizing the images from the api call*/
     private static final int MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
+    public ImageView mUserImageView; // For the tweets being retrieved
 
     View mView;
     Context mContext;
@@ -34,11 +35,10 @@ public class FirebaseTweetViewHolder extends RecyclerView.ViewHolder implements 
         super(itemView);
         mView = itemView;
         mContext = itemView.getContext();
-        itemView.setOnClickListener(this);
     }
 
     public void bindTweet(Tweet tweet) {
-        ImageView userImageView = (ImageView) mView.findViewById(R.id.userImageView);
+        mUserImageView = (ImageView) mView.findViewById(R.id.userImageView);
         TextView nameTextView = (TextView) mView.findViewById(R.id.userName);
         TextView retweetsTextView = (TextView) mView.findViewById(R.id.retweetsTextView);
         TextView followersTextView = (TextView) mView.findViewById(R.id.followersTextView);
@@ -47,35 +47,9 @@ public class FirebaseTweetViewHolder extends RecyclerView.ViewHolder implements 
                 .load(tweet.getImageUrl())
                 .resize(MAX_WIDTH, MAX_HEIGHT) // This is to resize images and prevent out of memory error.
                 .centerCrop()
-                .into(userImageView);
+                .into(mUserImageView);
         nameTextView.setText(tweet.getName());
-        retweetsTextView.setText("Retweets: " + tweet.getRetweets()); // Required to concat due to save issues.0
+        retweetsTextView.setText("Retweets: " + tweet.getRetweets()); // Required to concat due to save issues.
         followersTextView.setText("Followers: " + tweet.getFollowers());
-    }
-
-    @Override
-    public void onClick(View view) {
-        final ArrayList<Tweet> tweets = new ArrayList<>();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_TWEET);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    tweets.add(snapshot.getValue(Tweet.class));
-                }
-
-                int itemPosition = getLayoutPosition();
-
-                Intent intent = new Intent(mContext, TweetDetailActivity.class);
-                intent.putExtra("position", itemPosition + "");
-                intent.putExtra("tweets", Parcels.wrap(tweets));
-                mContext.startActivity(intent);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
 }
