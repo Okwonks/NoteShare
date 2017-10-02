@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.albert.noteshare.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,10 +30,10 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     @Bind(R.id.appWelcomeTextView) TextView mAppWelcomeTextView;
     @Bind(R.id.editFabButton) FloatingActionButton mEditFabButton;
-    @Nullable
-    @Bind(R.id.userNavTextView) TextView mNavUserTextView;
-    @Nullable
-    @Bind(R.id.emailTextView) TextView mEmailTextView;
+//    @Nullable
+//    @Bind(R.id.userNavTextView) TextView mNavUserTextView;
+//    @Nullable
+//    @Bind(R.id.emailTextView) TextView mEmailTextView;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -49,8 +50,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    mNavUserTextView.setText(user.getDisplayName());
-                    mEmailTextView.setText(user.getEmail());
+//                    mNavUserTextView.setText(user.getDisplayName());
+//                    mEmailTextView.setText(user.getEmail());
                 }
             }
         };
@@ -144,8 +145,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MainActivity.this, TweetSavedListActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_notes) {
-            Intent intent = new Intent(MainActivity.this, ListNotesActivity.class);
-            startActivity(intent);
+            if (mAuth.getCurrentUser() != null) {
+                Intent intent = new Intent(MainActivity.this, ListNotesActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(MainActivity.this, "You need to Login", Toast.LENGTH_SHORT).show();
+            }
         }else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

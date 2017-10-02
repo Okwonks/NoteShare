@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.albert.noteshare.Constants;
 import com.albert.noteshare.R;
 import com.albert.noteshare.models.Note;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +29,8 @@ public class WriteNoteActivity extends AppCompatActivity implements View.OnClick
 
     @Bind(R.id.noteSaveButton) FloatingActionButton mNoteSaveButton;
     @Bind(R.id.multiEditTextView) EditText mMultiEditTextView;
+
+    private Note mNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +69,7 @@ public class WriteNoteActivity extends AppCompatActivity implements View.OnClick
 
             Intent intent = new Intent(WriteNoteActivity.this, ListNotesActivity.class);
             startActivity(intent);
+            Toast.makeText(getBaseContext(), "Note saved", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -74,6 +80,14 @@ public class WriteNoteActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void saveNoteToFirebase(Note note) {
-        mWrittenNoteReference.push().setValue(note);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+        DatabaseReference noteRef = FirebaseDatabase.getInstance()
+                .getReference(Constants.FIREBASE_CHILD_WRITTEN_NOTE)
+                .child(uid);
+        DatabaseReference pushRef = noteRef.push();
+        String pushId = pushRef.getKey();
+        mNote.setPushId(pushId);
+        pushRef.setValue(note);
     }
 }
