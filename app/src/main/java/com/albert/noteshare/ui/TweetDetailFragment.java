@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.albert.noteshare.Constants;
 import com.albert.noteshare.R;
 import com.albert.noteshare.models.Tweet;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -69,10 +71,17 @@ public class TweetDetailFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View view) {
         if (view == mSaveTweetButton) {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();
             DatabaseReference tweetRef = FirebaseDatabase
                     .getInstance()
-                    .getReference(Constants.FIREBASE_CHILD_TWEET);
-            tweetRef.push().setValue(mTweet);
+                    .getReference(Constants.FIREBASE_CHILD_TWEET)
+                    .child(uid);
+            DatabaseReference pushRef = tweetRef.push();
+            String pushId = pushRef.getKey();
+            mTweet.setPushId(pushId);
+            pushRef.setValue(mTweet);
+
             Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
     }

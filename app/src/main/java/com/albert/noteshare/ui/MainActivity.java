@@ -3,6 +3,7 @@ package com.albert.noteshare.ui;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -12,9 +13,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.albert.noteshare.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,8 +30,10 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     @Bind(R.id.appWelcomeTextView) TextView mAppWelcomeTextView;
     @Bind(R.id.editFabButton) FloatingActionButton mEditFabButton;
-    @Bind(R.id.userNavTextView) TextView mNavUserTextView;
-    @Bind(R.id.emailTextView) TextView mEmailTextView;
+//    @Nullable
+//    @Bind(R.id.userNavTextView) TextView mNavUserTextView;
+//    @Nullable
+//    @Bind(R.id.emailTextView) TextView mEmailTextView;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -44,8 +50,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    mNavUserTextView.setText(user.getDisplayName());
-                    mEmailTextView.setText(user.getEmail());
+//                    mNavUserTextView.setText(user.getDisplayName());
+//                    mEmailTextView.setText(user.getEmail());
                 }
             }
         };
@@ -64,7 +70,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Intent intent = new Intent(MainActivity.this, WriteNoteActivity.class);
                     startActivity(intent);
                 } else {
-                    Snackbar.make(view, "You need to be logged in", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(view, "You need to be logged in", Snackbar.LENGTH_SHORT)
+                            .setAction("LOGIN", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // If necessary uncomment this code.
+                                    startActivity(intent);
+//                                    finish();
+                                }
+                            })
+                            .show();
                 }
             }
         });
@@ -89,6 +105,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    /* Handling the option Menu */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_logout) {
+            logout();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    /* Handles the navigation Drawer. */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -102,8 +145,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MainActivity.this, TweetSavedListActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_notes) {
-            Intent intent = new Intent(MainActivity.this, ListNotesActivity.class);
-            startActivity(intent);
+            if (mAuth.getCurrentUser() != null) {
+                Intent intent = new Intent(MainActivity.this, ListNotesActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(MainActivity.this, "You need to Login", Toast.LENGTH_SHORT).show();
+            }
         }else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

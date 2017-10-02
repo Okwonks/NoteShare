@@ -13,6 +13,7 @@ public class Tweet {
     private int followers;
     private String imageUrl;
     private int retweets;
+    private String pushId;
 
     public Tweet(String text, String retweeted, String name, int followers, String imageUrl, int retweets) {
         this.text = text;
@@ -52,5 +53,13 @@ public class Tweet {
     public String getLargeImageUrl(String imageUrl) {
         String largeImageUrl = imageUrl.substring(0, imageUrl.length() - 11).concat(".jpg");
         return largeImageUrl;
+    }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
 }
