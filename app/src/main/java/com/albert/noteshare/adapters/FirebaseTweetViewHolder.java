@@ -22,10 +22,6 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
-/**
- * Created by albert on 9/22/17.
- */
-
 public class FirebaseTweetViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     /*Constants for resizing the images from the api call*/
     private static final int MAX_WIDTH = 200;
