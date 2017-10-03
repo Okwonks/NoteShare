@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void createProgressDialog() {
-        mProgressDialog = new ProgressDialog(this); //
+        mProgressDialog = new ProgressDialog(this); // To be replaced with a progressbar and dialog
         mProgressDialog.setTitle("Loading...");
         mProgressDialog.setMessage("Authenticating request...");
         mProgressDialog.setCancelable(false);
