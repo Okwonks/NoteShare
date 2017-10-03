@@ -11,6 +11,7 @@ import com.albert.noteshare.Constants;
 import com.albert.noteshare.R;
 import com.albert.noteshare.models.Tweet;
 import com.albert.noteshare.ui.TweetDetailActivity;
+import com.albert.noteshare.util.ItemTouchHelperViewHolder;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,7 +23,7 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
-public class FirebaseTweetViewHolder extends RecyclerView.ViewHolder {
+public class FirebaseTweetViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
     /*Constants for resizing the images from the api call*/
     private static final int MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
@@ -51,5 +52,18 @@ public class FirebaseTweetViewHolder extends RecyclerView.ViewHolder {
         nameTextView.setText(tweet.getName());
         retweetsTextView.setText("Retweets: " + tweet.getRetweets()); // Required to concat due to save issues.
         followersTextView.setText("Followers: " + tweet.getFollowers());
+    }
+
+    @Override
+    public void onItemSelected() {
+
+    }
+
+    @Override
+    public void onItemClear() {
+        itemView.animate()
+                .alpha(1f)
+                .scaleX(1f)
+                .scaleY(1f);
     }
 }
