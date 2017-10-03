@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryLight"
-    tools:context="com.albert.noteshare.ui.NotesActivity">
+    tools:context="com.albert.noteshare.ui.TweetsActivity">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
