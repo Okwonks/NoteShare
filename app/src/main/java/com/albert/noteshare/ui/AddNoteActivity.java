@@ -28,7 +28,7 @@ public class AddNoteActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
         String tweet = mWriteEditText.getText().toString();
-        Intent intent = new Intent(AddNoteActivity.this, NotesActivity.class);
+        Intent intent = new Intent(AddNoteActivity.this, TweetsActivity.class);
         intent.putExtra("tweet", tweet);
         startActivity(intent);
     }

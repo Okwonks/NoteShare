@@ -3,7 +3,6 @@ package com.albert.noteshare.ui;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -139,11 +138,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_explore) {
-            Intent intent = new Intent(MainActivity.this, NotesActivity.class);
+            Intent intent = new Intent(MainActivity.this, TweetsActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_tweets) {
-            Intent intent = new Intent(MainActivity.this, TweetSavedListActivity.class);
-            startActivity(intent);
+            if (mAuth.getCurrentUser() != null) {
+                Intent intent = new Intent(MainActivity.this, TweetSavedListActivity.class);
+                startActivity(intent); // conditional is necessary since tweets are saved to a specific user.
+            } else {
+                Toast.makeText(MainActivity.this, "You need to Login", Toast.LENGTH_SHORT).show();
+            }
         } else if (id == R.id.nav_notes) {
             if (mAuth.getCurrentUser() != null) {
                 Intent intent = new Intent(MainActivity.this, ListNotesActivity.class);

@@ -62,7 +62,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         if (view == mRegisterTextView) {
             Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
         }
@@ -73,7 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void createProgressDialog() {
-        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog = new ProgressDialog(this); //
         mProgressDialog.setTitle("Loading...");
         mProgressDialog.setMessage("Authenticating request...");
         mProgressDialog.setCancelable(false);

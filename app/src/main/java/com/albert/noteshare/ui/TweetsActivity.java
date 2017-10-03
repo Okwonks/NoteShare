@@ -34,8 +34,8 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class NotesActivity extends AppCompatActivity {
-    private static final String TAG = NotesActivity.class.getSimpleName();
+public class TweetsActivity extends AppCompatActivity {
+    private static final String TAG = TweetsActivity.class.getSimpleName();
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
     private String mRecentSearched;
@@ -65,14 +65,13 @@ public class NotesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String tweet = ((TextView)view).getText().toString();
-                Toast.makeText(NotesActivity.this, tweet, Toast.LENGTH_LONG).show();
+                Toast.makeText(TweetsActivity.this, tweet, Toast.LENGTH_LONG).show();
             }
         });
 
 
         Intent intent = getIntent();
         String tweet = intent.getStringExtra("tweet");
-        mNoteTextView.setText("Your note: " + tweet + " is being added...");
 
         getTweet(tweet);
     }
@@ -127,12 +126,12 @@ public class NotesActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 mTweets = twitterService.processResults(response);
 
-                NotesActivity.this.runOnUiThread(new Runnable() {
+                TweetsActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         mAdapter = new TweetListAdapter(getApplicationContext(), mTweets);
                         mTweetRecyclerView.setAdapter(mAdapter);
-                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(NotesActivity.this);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(TweetsActivity.this);
                         mTweetRecyclerView.setLayoutManager(layoutManager);
                         mTweetRecyclerView.setHasFixedSize(true);
                     }
