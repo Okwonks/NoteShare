@@ -21,4 +21,7 @@
     <string name="logout">Logout</string>
     <string name="log_in">Log In</string>
     <string name="login_header">Login</string>
+    <string name="login">Login</string>
+    <string name="text_user">user</string>
+    <string name="email_main">user@email.com</string>
 </resources>

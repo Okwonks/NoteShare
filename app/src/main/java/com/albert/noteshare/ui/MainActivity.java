@@ -3,6 +3,7 @@ package com.albert.noteshare.ui;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -49,9 +51,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-//                    mNavUserTextView.setText(user.getDisplayName());
-//                    mEmailTextView.setText(user.getEmail());
+//                    TextView navUserTextView = (TextView) findViewById(R.id.userNavTextView);
+//                    TextView emailTextView = (TextView) findViewById(R.id.emailTextView);
+//                    navUserTextView.setText(user.getDisplayName());
+//                    emailTextView.setText(user.getEmail());
                 }
+
             }
         };
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -107,8 +112,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     /* Handling the option Menu */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
+
+        if (mAuth.getCurrentUser() == null) {
+            MenuItem item = menu.findItem(R.id.action_logout);
+            item.setVisible(false);
+        } else {
+            MenuItem item = menu.findItem(R.id.action_login);
+            item.setVisible(false);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -119,15 +131,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             logout();
             return true;
         }
+        if (id == R.id.action_login) {
+            login();
+        }
         return super.onOptionsItemSelected(item);
     }
-
+    /* Logout method for users to logout of the app */
     private void logout() {
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(MainActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
+    }
+
+    private void login() {
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 
     /* Handles the navigation Drawer. */
