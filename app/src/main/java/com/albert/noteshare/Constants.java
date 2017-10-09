@@ -1,9 +1,5 @@
 package com.albert.noteshare;
 
-/**
- * Created by albert on 9/15/17.
- */
-
 public class Constants {
     public static final String TWITTER_CONSUMER_KEY = BuildConfig.TWITTER_CONSUMER_KEY;
     public static final String TWITTER_CONSUMER_SECRET = BuildConfig.TWITTER_CONSUMER_SECRET;

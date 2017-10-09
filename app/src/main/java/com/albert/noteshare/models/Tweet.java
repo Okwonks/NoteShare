@@ -2,9 +2,6 @@ package com.albert.noteshare.models;
 
 import org.parceler.Parcel;
 
-/**
- * Created by albert on 9/18/17.
- */
 @Parcel
 public class Tweet {
     private String text;
@@ -53,8 +50,7 @@ public class Tweet {
     }
 
     public String getLargeImageUrl(String imageUrl) {
-        String largeImageUrl = imageUrl.substring(0, imageUrl.length() - 11).concat(".jpg");
-        return largeImageUrl;
+        return imageUrl.replace("_normal", "");
     }
 
     public String getPushId() {
